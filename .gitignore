@@ -1,0 +1,40 @@
+# Node dependency directories
+node_modules/
+**/node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Environment and config files
+.env
+.env.test
+.env.local
+
+# TypeScript build artifacts
+dist/
+out/
+*.tsbuildinfo
+
+# Reports and coverage
+allure-results/
+allure-report/
+coverage/
+test-report/
+
+# VSCode / IDE settings
+.vscode/
+.idea/
+
+# Temporary files
+tmp/
+temp/
