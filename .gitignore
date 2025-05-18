@@ -26,10 +26,10 @@ out/
 *.tsbuildinfo
 
 # Reports and coverage
-allure-results/
-allure-report/
+allure/
 coverage/
 test-report/
+screenshots/
 
 # VSCode / IDE settings
 .vscode/
