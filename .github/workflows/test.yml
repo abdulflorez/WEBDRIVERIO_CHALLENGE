@@ -1,0 +1,61 @@
+name: manual-execution
+on:
+    workflow_dispatch:
+        inputs:
+            environment:
+                description: 'Environment to run tests against'
+                required: true
+                type: choice
+                options:
+                    - dev
+                    - staging
+                    - prod
+                default: 'prod'
+            test_suite:
+                description: 'Cucumber tag for scenarios (e.g., smoke, regression, signup-in)'
+                required: true
+                type: choice
+                options:
+                    - smoke
+                    - regression
+                    - signup-in
+                default: 'smoke'
+env: # Workflow-level environment variables
+    NODE_ENV: ${{ github.event.inputs.environment }}
+jobs:
+    run-webdriverio-suite:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js (v20.x)
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20.x' # Uses the latest patch for Node.js 20. Use 'lts/*' for latest active LTS.
+                  cache: 'npm'
+
+            - name: Setup Java for Allure
+              uses: actions/setup-java@v4
+              with:
+                  distribution: 'temurin'
+                  java-version: '17' # Allure typically needs Java for report generation
+
+            - name: Install Dependencies
+              run: npm ci
+
+            - name: Run WebdriverIO Tests with Cucumber Tags
+              run: echo "Running scenarios tagged @${{ github.event.inputs.test_suite }}"
+                  npx wdio run wdio.conf.ts --cucumberOpts.tagExpression="@${{ github.event.inputs.test_suite }}"
+
+            - name: Generate Allure Report
+              if: always()
+              run: npm run allure:generate
+
+            - name: Upload Allure Report
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: allure-report-${{ github.event.inputs.environment }}-${{ github.event.inputs.test_suite }} # More descriptive artifact name
+                  path: allure-report
+                  retention-days: 7

@@ -1,4 +1,4 @@
-@smoke @regression
+@smoke @regression @signup-in
 Feature: Authentication Sign Up and Sign In
   As a new user, I want to register an account And as a returning user, I want to log in
 
