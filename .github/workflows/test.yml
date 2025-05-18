@@ -19,6 +19,12 @@ on:
                     - smoke
                     - regression
                     - signup-in
+                    - profile
+                    - productDetails
+                    - basket
+                    - favorites
+                    - checkout
+                    - search
                 default: 'smoke'
 env: # Workflow-level environment variables
     NODE_ENV: ${{ github.event.inputs.environment }}
