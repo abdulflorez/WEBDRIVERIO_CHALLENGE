@@ -1,3 +1,4 @@
+import { ENDPOINTS } from '../env_config/endpoint';
 import { envConfig } from '../env_config/env.config';
 import { dashboardPage } from '../page_objects/dashboard.page';
 import { loginPage } from '../page_objects/login.page';
@@ -9,12 +10,12 @@ class LoginOperations extends BaseOperations {
         await loginPage.emailInput.setValue(access.email);
         await loginPage.passwordInput.setValue(access.password);
         await loginPage.sibmitLoginBtn.click();
-        await loginPage.waitForPageLoad(`${envConfig.baseUrl}/account`);
+        await loginPage.waitForPageLoad(`${envConfig.baseUrl}${ENDPOINTS.dashboardPage}`);
         chaiExpect(await dashboardPage.favoriteLink.isDisplayed()).true;
     }
 
     public async validateLoginPageVisible() {
-        await loginPage.waitForPageLoad(`${envConfig.baseUrl}/auth/login`);
+        await loginPage.waitForPageLoad(`${envConfig.baseUrl}${ENDPOINTS.loginPage}`);
         chaiExpect(await loginPage.emailInput.isDisplayed()).true;
     }
 }

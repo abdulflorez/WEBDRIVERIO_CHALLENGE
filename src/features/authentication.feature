@@ -4,7 +4,7 @@ Feature: Authentication Sign Up and Sign In
 
   Background:
     Given I am on the page practicesoftwaretesting page
-
+  @new-user
   Scenario: New user registration with mandatory fields
     When I go to the Sign Up page
     And I register with the following information:

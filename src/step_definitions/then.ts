@@ -1,10 +1,10 @@
 import { DataTable, Then } from '@wdio/cucumber-framework';
 import { loginOperations } from '../operations/login.operations';
-import { RegistrationData } from '../types/interfaces/registration_data.interface';
 import { envConfig } from '../env_config/env.config';
 import { dashboardPage } from '../page_objects/dashboard.page';
 import { loginPage } from '../page_objects/login.page';
 import { dashboardOperations } from '../operations/dashboard.operations';
+import { profileOperations } from '../operations/profile.operations';
 
 Then('I should be redirected to the Sign In page', async () => {
     await loginOperations.validateLoginPageVisible();
@@ -20,6 +20,6 @@ Then('I should see a dropdown with the username {string} that displays the follo
     await dashboardOperations.validateLoggedUser(fulname, expectedOptions);
 });
 
-// Then('I should see a logout option available', () => {
-//     console.log('This is a Then method');
-// });
+Then('I should see a confirmation {string}', async (expectedMessage: string) => {
+    await profileOperations.validateSuccessfullyUpdatedBanner(expectedMessage);
+});

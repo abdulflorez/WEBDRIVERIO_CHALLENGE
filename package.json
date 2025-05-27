@@ -6,6 +6,7 @@
         "wdio": "wdio run wdio.conf.ts",
         "test": "npm run wdio",
         "test:only": "npx wdio run wdio.conf.ts --cucumberOpts.tagExpression='@only'",
+        "test:new-user": "npx wdio run wdio.conf.ts --cucumberOpts.tagExpression='@new-user'",
         "test:chrome": "wdio run wdio.conf.ts --capabilities.browserName=chrome",
         "test:firefox": "wdio run wdio.conf.ts --capabilities.browserName=firefox",
         "test:headless": "wdio run wdio.conf.ts --capabilities.browserName=chrome --headless",
