@@ -34,3 +34,7 @@ When('I update my profile information:', async (table: DataTable) => {
 When('I search for {string} by its exact name', async (wordToSearch: string) => {
     await homeOperations.searchProductByWord(wordToSearch);
 });
+
+When('I click on the product titled {string}', async (productName: string) => {
+    await homeOperations.selectAProductByName(productName);
+});

@@ -6,6 +6,7 @@ import { loginPage } from '../page_objects/login.page';
 import { dashboardOperations } from '../operations/dashboard.operations';
 import { profileOperations } from '../operations/profile.operations';
 import { homeOperations } from '../operations/home.operations';
+import { productDetailsOperations } from '../operations/product_details.operations';
 
 Then('I should be redirected to the Sign In page', async () => {
     await loginOperations.validateLoginPageVisible();
@@ -31,4 +32,8 @@ Then('A subtitle {string} is displayed', async (expectedText: string) => {
 
 Then('the results show only product card {string} world', async (expectedText: string) => {
     await homeOperations.validateSearchResults(expectedText);
+});
+
+Then('I should see the product details page for {string} with title, price, and description', async (titleName: string) => {
+    await productDetailsOperations.validateProductDetailsPage(titleName);
 });
