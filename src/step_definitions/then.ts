@@ -5,6 +5,7 @@ import { dashboardPage } from '../page_objects/dashboard.page';
 import { loginPage } from '../page_objects/login.page';
 import { dashboardOperations } from '../operations/dashboard.operations';
 import { profileOperations } from '../operations/profile.operations';
+import { homeOperations } from '../operations/home.operations';
 
 Then('I should be redirected to the Sign In page', async () => {
     await loginOperations.validateLoginPageVisible();
@@ -20,6 +21,14 @@ Then('I should see a dropdown with the username {string} that displays the follo
     await dashboardOperations.validateLoggedUser(fulname, expectedOptions);
 });
 
-Then('I should see a confirmation {string}', async (expectedMessage: string) => {
-    await profileOperations.validateSuccessfullyUpdatedBanner(expectedMessage);
+Then('I should see a confirmation {string}', async (expectedText: string) => {
+    await profileOperations.validateSuccessfullyUpdatedBanner(expectedText);
+});
+
+Then('A subtitle {string} is displayed', async (expectedText: string) => {
+    await homeOperations.validateSearchingSubtitle(expectedText);
+});
+
+Then('the results show only product card {string} world', async (expectedText: string) => {
+    await homeOperations.validateSearchResults(expectedText);
 });

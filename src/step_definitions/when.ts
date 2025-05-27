@@ -30,3 +30,7 @@ When('I update my profile information:', async (table: DataTable) => {
     const updates = Object.fromEntries(table.raw().slice(1));
     await profileOperations.updateProfileData(updates);
 });
+
+When('I search for {string} by its exact name', async (wordToSearch: string) => {
+    await homeOperations.searchProductByWord(wordToSearch);
+});
