@@ -11,11 +11,13 @@ class LoginOperations extends BaseOperations {
         await loginPage.passwordInput.setValue(access.password);
         await loginPage.sibmitLoginBtn.click();
         await loginPage.waitForPageLoad(`${envConfig.baseUrl}${ENDPOINTS.dashboardPage}`);
+        await dashboardPage.favoriteLink.waitForDisplayed();
         chaiExpect(await dashboardPage.favoriteLink.isDisplayed()).true;
     }
 
     public async validateLoginPageVisible() {
         await loginPage.waitForPageLoad(`${envConfig.baseUrl}${ENDPOINTS.loginPage}`);
+        await loginPage.emailInput.waitForDisplayed();
         chaiExpect(await loginPage.emailInput.isDisplayed()).true;
     }
 }

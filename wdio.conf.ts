@@ -9,14 +9,14 @@ export const config: WebdriverIO.Config = {
     specs: ['./src/features/**/*.feature'],
     // Patterns to exclude.
     exclude: [],
-    maxInstances: 10,
+    maxInstances: 3,
     capabilities: [
-        {
-            browserName: 'chrome',
-        },
         // {
-        //     browserName: 'firefox',
+        //     browserName: 'chrome',
         // },
+        {
+            browserName: 'firefox',
+        },
     ],
     // Level of logging verbosity: trace | debug | info | warn | error | silent
     logLevel: 'silent',
@@ -43,7 +43,10 @@ export const config: WebdriverIO.Config = {
     // specFileRetriesDelay: 0,
     // Whether or not retried spec files should be retried immediately or deferred to the end of the queue
     // specFileRetriesDeferred: false,
-    reporters: ['spec', ['allure', { outputDir: 'allure/allure-results', disableWebdriverStepsReporting: true, disableWebdriverScreenshotsReporting: true }]],
+    reporters: [
+        'spec',
+        ['allure', { outputDir: 'allure/allure-results', disableWebdriverStepsReporting: true, disableWebdriverScreenshotsReporting: true, disableMochaHooks: true }],
+    ],
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         require: ['./src/step_definitions/given.ts', './src/step_definitions/when.ts', './src/step_definitions/then.ts'],
@@ -61,11 +64,21 @@ export const config: WebdriverIO.Config = {
     },
     /**
      * Gets executed once before all workers get launched.
-     * @param {object} config wdio configuration object
-     * @param {Array.<Object>} capabilities list of capabilities details
+     * @param {object} _config wdio configuration object
+     * @param {Array.<Object>} _capabilities list of capabilities details
      */
-    // onPrepare: function (config, capabilities) {
-    // },
+    onPrepare: function (_config, _capabilities) {
+        const resultsDir = path.join(process.cwd(), 'allure', 'allure-results');
+        const reportDir = path.join(process.cwd(), 'allure', 'allure-report');
+        if (fs.existsSync(resultsDir)) {
+            fs.rmSync(resultsDir, { recursive: true, force: true });
+            console.log('🧹 [onPrepare] Old Allure results cleaned.');
+        }
+        if (fs.existsSync(reportDir)) {
+            fs.rmSync(reportDir, { recursive: true, force: true });
+            console.log('🧹 [onPrepare] Old Allure report cleaned.');
+        }
+    },
     /**
      * Gets executed before a worker process is spawned and can be used to initialize specific service
      * for that worker as well as modify runtime environments in an async fashion.
