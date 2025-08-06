@@ -14,8 +14,8 @@
         "allure:generate": "npx allure generate allure/allure-results -o allure/allure-report --clean",
         "allure:open": "npx allure open allure/allure-report",
         "nicereport:open": "node node_modules/wdio-html-nice-reporter/lib/makeReport.js master-report.html 'reports/html-reports/'",
-        "lint": "eslint . --ext .js,.ts,.mts,.cts",
-        "lint:fix": "npx eslint \"src/**/*.{ts,js}\" --fix",
+        "lint": "eslint \"src/**/*.{ts,js}\"",
+        "lint:fix": "eslint \"src/**/*.{ts,js}\" --fix",
         "prettier:write": "npx prettier --write .",
         "prepare": "husky install"
     },
@@ -49,7 +49,7 @@
         "wdio-html-nice-reporter": "^8.1.7"
     },
     "lint-staged": {
-        "*.{js,ts,mts,cts}": [
+        "*.{js,ts}": [
             "eslint --fix",
             "prettier --write"
         ]
