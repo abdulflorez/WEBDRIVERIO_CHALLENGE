@@ -1,15 +1,15 @@
 import { BasePage } from '../base.page';
 
 class HeaderComp extends BasePage {
-    public get signInLink() {
+    public get signInLink(): ChainablePromiseElement {
         return $('[data-test="nav-sign-in"]');
     }
 
-    public get userAccountDropdown() {
+    public get userAccountDropdown(): ChainablePromiseElement {
         return $('#menu');
     }
 
-    public get userAccountOptions() {
+    public get userAccountOptions(): ChainablePromiseArray {
         return $$('.dropdown-menu.show a');
     }
 }

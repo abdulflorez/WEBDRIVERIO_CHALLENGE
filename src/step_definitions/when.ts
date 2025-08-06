@@ -27,7 +27,7 @@ When('I go to my Profile page', async () => {
 });
 
 When('I update my profile information:', async (table: DataTable) => {
-    const updates = Object.fromEntries(table.raw().slice(1));
+    const updates = Object.fromEntries(table.raw().slice(1)) as Record<string, string>;
     await profileOperations.updateProfileData(updates);
 });
 

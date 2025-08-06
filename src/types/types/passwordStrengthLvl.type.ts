@@ -1,1 +1,1 @@
-export type PasswordStrengthLvl = 'Weak'| 'Moderate' | 'Strong' | 'Very Strong' | 'Excellent'
+export type PasswordStrengthLvl = 'Weak' | 'Moderate' | 'Strong' | 'Very Strong' | 'Excellent';

@@ -6,19 +6,19 @@ import { chaiExpect } from '../utils/chai';
 import { BaseOperations } from './base.operations';
 
 class HomeOperations extends BaseOperations {
-    public async visit() {
+    public async visit(): Promise<void> {
         await this.navigateTo(envConfig.baseUrl);
         await homePage.categoryFilters[0].waitForClickable();
     }
 
-    public async searchProductByWord(word: string) {
+    public async searchProductByWord(word: string): Promise<void> {
         await homePage.searchInput.setValue(word);
         await homePage.searchBtn.click();
     }
 
-    public async selectAProductByName(productName: string) {
-        const cards = await homePage.productCardName;
-        for (const card of cards) {
+    public async selectAProductByName(productName: string): Promise<void> {
+        await homePage.productCardName[0].isClickable();
+        for (const card of homePage.productCardName) {
             const text = await card.getText();
             if (text.includes(productName)) {
                 await card.click();
@@ -28,7 +28,7 @@ class HomeOperations extends BaseOperations {
         await productDetailsPage.waitForPageLoad(ENDPOINTS.productDetailsPage);
     }
 
-    public async validateSearchingSubtitle(word: string) {
+    public async validateSearchingSubtitle(word: string): Promise<void> {
         const issubtitleUpdated = await browser.waitUntil(async () => {
             const subtitleText = await homePage.searchSubtitle.getText();
             return subtitleText.includes(word);
@@ -36,11 +36,11 @@ class HomeOperations extends BaseOperations {
         chaiExpect(issubtitleUpdated).equal(true);
     }
 
-    public async validateSearchResults(expectedTextInName: string) {
+    public async validateSearchResults(expectedTextInName: string): Promise<void> {
         const allResultsCorrect = await browser.waitUntil(async () => {
-            const cardTitles = await homePage.productCardName;
+            await homePage.productCardName[0].isClickable();
             const productNames = [];
-            for (const card of cardTitles) {
+            for (const card of homePage.productCardName) {
                 productNames.push(await card.getText());
             }
             return productNames.every((cardName) => cardName.toLowerCase().includes(expectedTextInName));

@@ -4,7 +4,7 @@ import { chaiExpect } from '../utils/chai';
 import { BaseOperations } from './base.operations';
 
 class RegistrationOperations extends BaseOperations {
-    public async fillRegistrationForm(data: RegistrationData) {
+    public async fillRegistrationForm(data: RegistrationData): Promise<void> {
         await registrationPage.firstNameInput.setValue(data.firstName);
         await registrationPage.lastNameInput.setValue(data.lastName);
         await registrationPage.dateOfBirthInput.setValue(data.dob);

@@ -1,4 +1,5 @@
 import { EnvConfig } from '../types/interfaces/env_config.interface';
+import { Environment } from '../types/types/enviroments.type';
 
 const TIMEOUTS_BY_DEFAULT = {
     low: 5000,
@@ -23,7 +24,7 @@ const configs: Record<Environment, EnvConfig> = {
 };
 
 // Determine environment from NODE_ENV or default to development
-const env = (process.env.NODE_ENV as Environment) || 'prod';
+const env = (process.env.NODE_ENV as Environment) ?? 'prod';
 
 // Fallback to development if NODE_ENV is unknown
 export const envConfig = configs[env] || configs.prod;

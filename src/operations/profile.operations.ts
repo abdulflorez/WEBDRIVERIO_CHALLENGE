@@ -20,7 +20,7 @@ class ProfileOperations extends BaseOperations {
             newPassword: string;
             expectedLvl?: PasswordStrengthLvl;
         };
-    }) {
+    }): Promise<void> {
         for (const [inputName, valueToUpdate] of Object.entries(inputs)) {
             if (!valueToUpdate) continue;
             if (inputName === 'password' && inputs.password) {
@@ -30,14 +30,14 @@ class ProfileOperations extends BaseOperations {
                 const passwordLvl = await registrationPage.passwordStrengthLvlLabel.getText();
                 chaiExpect(passwordLvl).to.equal(inputs.password.expectedLvl ?? 'Excellent');
             } else {
-                //@ts-ignore
-                await profilePage[`${inputName}Input`].setValue(valueToUpdate);
+                //@ts-expect-error this input field name is dynamic and not typed
+                await ((await profilePage[`${inputName}Input`]) as WebdriverIO.Element).setValue(valueToUpdate);
             }
         }
         await profilePage.updateProfileBtn.click();
     }
 
-    public async validateSuccessfullyUpdatedBanner(message: string) {
+    public async validateSuccessfullyUpdatedBanner(message: string): Promise<void> {
         await profilePage.successfulUpdateBaner.isDisplayed();
         const succefulMesage = await profilePage.successfulUpdateBaner.getText();
         chaiExpect(succefulMesage).contain(message);

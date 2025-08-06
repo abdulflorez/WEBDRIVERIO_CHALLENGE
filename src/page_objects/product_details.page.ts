@@ -1,15 +1,15 @@
 import { BasePage } from './base.page';
 
 class ProductDetailsPage extends BasePage {
-    public get title() {
+    public get title(): ChainablePromiseElement {
         return $('h1[data-test="product-name"]');
     }
 
-    public get description() {
+    public get description(): ChainablePromiseElement {
         return $('#description');
     }
 
-    public get addToCartBtn() {
+    public get addToCartBtn(): ChainablePromiseElement {
         return $('#btn-add-to-cart');
     }
 }

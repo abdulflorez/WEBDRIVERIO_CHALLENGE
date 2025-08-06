@@ -14,7 +14,7 @@ Then('I should be redirected to the Sign In page', async () => {
 
 Then('I should see my dashboard', async () => {
     await loginPage.waitForPageLoad(`${envConfig.baseUrl}/account`);
-    expect(await dashboardPage.favoriteLink.isDisplayed()).toBeTruthy();
+    await expect(await dashboardPage.favoriteLink.isDisplayed()).toBeTruthy();
 });
 
 Then('I should see a dropdown with the username {string} that displays the following information:', async (fulname: string, table: DataTable) => {

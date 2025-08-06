@@ -1,7 +1,7 @@
 import { BasePage } from './base.page';
 
 class DashboardPage extends BasePage {
-    public get favoriteLink() {
+    public get favoriteLink(): ChainablePromiseElement {
         return $('.btn-group-vertical a:nth-child(1)');
     }
 }
