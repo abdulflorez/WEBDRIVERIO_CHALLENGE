@@ -80,13 +80,11 @@ Absolutely! Here’s your **Reporting** section in clear, professional English, 
 This framework provides robust test reporting with **three complementary reporters**:
 
 1. **Spec Reporter**
-
     - The classic, fast reporter: displays readable, color-coded results directly in the console/terminal during test execution.
     - Lets you quickly spot passing and failing tests without opening extra files.
     - Configured as default—results will always appear in your terminal output.
 
 2. **HTML Nice Report**
-
     - Generates a **clean, visual HTML report** that is easy to share with your team or stakeholders.
     - The main report is saved under `/reports/html-reports/`.
     - To open the HTML report in your browser, simply run:
@@ -100,7 +98,6 @@ This framework provides robust test reporting with **three complementary reporte
     - Useful for sharing test outcomes with non-technical team members.
 
 3. **Allure Report**
-
     - Produces an **interactive and comprehensive HTML report** (with history, screenshots, attachments, and advanced filtering) from `/allure/allure-results/`.
     - To generate and view the Allure report, run:
 
