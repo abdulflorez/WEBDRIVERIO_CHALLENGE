@@ -1,6 +1,7 @@
 node_modules/
-allure-results/
-allure-report/
+dist
+allure/
+reports/
 
 *.log
 npm-debug.log*
