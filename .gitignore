@@ -30,6 +30,7 @@ allure/
 coverage/
 test-report/
 screenshots/
+reports/
 
 # VSCode / IDE settings
 .vscode/

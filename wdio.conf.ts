@@ -1,7 +1,9 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { addAttachment } from '@wdio/allure-reporter';
+
 const allure = require('allure-commandline');
+const browserName = process.env.BROWSER ?? 'chrome';
 
 export const config: WebdriverIO.Config = {
     runner: 'local',
@@ -11,11 +13,8 @@ export const config: WebdriverIO.Config = {
     exclude: [],
     maxInstances: 3,
     capabilities: [
-        // {
-        //     browserName: 'chrome',
-        // },
         {
-            browserName: 'firefox',
+            browserName: browserName,
         },
     ],
     // Level of logging verbosity: trace | debug | info | warn | error | silent
@@ -44,8 +43,29 @@ export const config: WebdriverIO.Config = {
     // Whether or not retried spec files should be retried immediately or deferred to the end of the queue
     // specFileRetriesDeferred: false,
     reporters: [
-        'spec',
+        [
+            'spec',
+            {
+                color: true,
+                symbols: {
+                    passed: '[PASS]',
+                    failed: '[FAIL]',
+                },
+            },
+        ],
         ['allure', { outputDir: 'allure/allure-results', disableWebdriverStepsReporting: true, disableWebdriverScreenshotsReporting: true, disableMochaHooks: true }],
+        [
+            'html-nice',
+            {
+                outputDir: './reports/html-reports/',
+                filename: 'report.html',
+                reportTitle: 'Test Report Title',
+                linkScreenshots: true,
+                showInBrowser: true,
+                collapseTests: false,
+                useOnAfterCommandForScreenshot: false,
+            },
+        ],
     ],
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
@@ -231,16 +251,14 @@ export const config: WebdriverIO.Config = {
      * @param {<Object>} _results object containing test results
      */
     onComplete: function (_exitCode, _config, _capabilities, _results) {
+        // Allure report
         const reportError = new Error('Could not generate Allure report');
         const generation = allure(['generate', 'allure/allure-results', '-o', 'allure/allure-report', '--clean']);
         return new Promise<void>((resolve, reject) => {
             const generationTimeout = setTimeout(() => reject(reportError), 5000);
             generation.on('exit', function (exitCode: number) {
                 clearTimeout(generationTimeout);
-
-                if (exitCode !== 0) {
-                    return reject(reportError);
-                }
+                if (exitCode !== 0) return reject(reportError);
                 console.log('Allure report successfully generated');
                 resolve();
             });

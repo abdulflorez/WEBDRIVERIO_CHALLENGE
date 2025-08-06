@@ -15,5 +15,6 @@
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true
     },
+    "exclude": ["node_modules"],
     "include": ["test", "wdio.conf.ts", "./src/"]
 }

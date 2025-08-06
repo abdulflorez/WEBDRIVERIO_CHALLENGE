@@ -13,6 +13,7 @@
         "test:parallel": "wdio run wdio.conf.ts",
         "allure:generate": "npx allure generate allure/allure-results -o allure/allure-report --clean",
         "allure:open": "npx allure open allure/allure-report",
+        "nicereport:open": "node node_modules/wdio-html-nice-reporter/lib/makeReport.js master-report.html 'reports/html-reports/'",
         "prettier:write": "npx prettier --write ."
     },
     "keywords": [],
@@ -30,6 +31,7 @@
         "chai": "^5.2.0",
         "chai-http": "^5.1.2",
         "dotenv": "^16.5.0",
-        "prettier": "3.5.3"
+        "prettier": "3.5.3",
+        "wdio-html-nice-reporter": "^8.1.7"
     }
 }
