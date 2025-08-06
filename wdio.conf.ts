@@ -3,7 +3,7 @@ import * as path from 'path';
 import { addAttachment } from '@wdio/allure-reporter';
 
 const allure = require('allure-commandline');
-const browserName = process.env.BROWSER ?? 'chrome';
+const browserName = process.env.BROWSER ?? 'firefox';
 
 export const config: WebdriverIO.Config = {
     runner: 'local',

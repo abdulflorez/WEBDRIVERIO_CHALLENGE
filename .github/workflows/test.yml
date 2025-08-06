@@ -26,8 +26,17 @@ on:
                     - checkout
                     - search
                 default: 'smoke'
+            browser:
+              description: 'Browser to run tests'
+              required: true
+              type: choice
+              options:
+                - firefox
+                - chrome
+              default: 'firefox'
 env: # Workflow-level environment variables
     NODE_ENV: ${{ github.event.inputs.environment }}
+    BROWSER_NAME: ${{ github.event.inputs.browser }}
 jobs:
     run-webdriverio-suite:
         runs-on: ubuntu-latest
