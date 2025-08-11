@@ -11,7 +11,7 @@ Feature: Authentication Sign Up and Sign In
       | firstName | lastName | dob        | street     | postcode | city   | state | country  | phone        | email               | password         |
       | John      | Doe      | 1990-01-01 | 123 Elm St | 12345    | Gotham | NY    | Colombia | 573001112233 | userToTest@mail.com | Cl@veParaTest!23 |
     Then I should be redirected to the Sign In page
-
+  @login
   Scenario: Existing user login with credentials
     When I go to the Sign In page
     And I login with email "userToTest@mail.com" and password "Cl@veParaTest!23"
